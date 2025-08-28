@@ -1,0 +1,9 @@
+{
+    "diagnostics.globals": [
+        "copy_visual_selection",
+        "vim"
+    ],
+    "diagnostics.disable": [
+        "assign-type-mismatch"
+    ]
+}
