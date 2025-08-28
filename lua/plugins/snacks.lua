@@ -9,6 +9,16 @@ local function term_nav(dir)
 	end
 end
 
+-- Add this at the top of your config file, before returning the plugin table
+vim.api.nvim_create_autocmd("BufLeave", {
+	pattern = "*",
+	callback = function()
+		if vim.bo.modified then
+			vim.cmd("silent! write")
+		end
+	end,
+})
+
 return {
 	{
 		"folke/snacks.nvim",

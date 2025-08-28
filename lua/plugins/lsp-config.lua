@@ -18,7 +18,6 @@ return {
 				"prismals", -- prisma-language-server
 				"superhtml",
 				"tailwindcss",
-				"ts_ls", -- typescript-language-server
 			},
 		},
 	},
@@ -26,7 +25,13 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local lspconfig = require("lspconfig")
+
+			local on_attach = function(client, bufnr)
+				local opts = { noremap = true, silent = true, buffer = bufnr }
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+			end
 
 			local servers = {
 				cssls = {},
@@ -38,19 +43,14 @@ return {
 				prismals = {},
 				superhtml = {},
 				tailwindcss = {},
-				ts_ls = {},
 			}
 
 			for server, opts in pairs(servers) do
-				lspconfig[server].setup(opts)
+				lspconfig[server].setup(vim.tbl_extend("force", {
+					capabilities = capabilities,
+					on_attach = on_attach,
+				}, opts))
 			end
-
-			local keymap_opts = { noremap = true, silent = true }
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, keymap_opts)
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymap_opts)
-			vim.keymap.set("n", "gr", vim.lsp.buf.references, keymap_opts)
-			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, keymap_opts)
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, keymap_opts)
 		end,
 	},
 }

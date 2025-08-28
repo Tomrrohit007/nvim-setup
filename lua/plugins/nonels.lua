@@ -15,7 +15,6 @@ return {
         },
       })
 
-      -- Keymap to manually format buffer
       vim.keymap.set("n", "<leader>gf", function()
         vim.lsp.buf.format({ async = true })
       end, { desc = "Format buffer" })

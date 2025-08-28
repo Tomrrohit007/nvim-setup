@@ -2,6 +2,11 @@
     "diagnostics.globals": [
         "vim",
         "null_ls",
-        "term_nav"
+        "term_nav",
+        "include_in_completion",
+        "MiniSnippets",
+        "expand_select_override",
+        "expand_from_lsp",
+        "jump"
     ]
 }
