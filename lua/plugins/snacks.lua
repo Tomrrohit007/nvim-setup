@@ -133,13 +133,7 @@ return {
 				end,
 				desc = "Goto Implementation",
 			},
-			{
-				"<leader>.",
-				function()
-					require("snacks").scratch()
-				end,
-				desc = "Toggle Scratch Buffer",
-			},
+
 			{
 				"<leader>S",
 				function()
