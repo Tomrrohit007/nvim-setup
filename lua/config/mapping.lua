@@ -8,7 +8,6 @@ opt.shiftwidth = 2
 opt.tabstop = 2
 opt.relativenumber = true
 opt.clipboard = "unnamedplus"
-
 -- Leader key
 vim.g.mapleader = " "
 vim.g.lazyvim_blink_main = false
