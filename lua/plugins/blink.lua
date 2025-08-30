@@ -1,16 +1,43 @@
-return {
+return { {
   "saghen/blink.cmp",
 
   dependencies = {
     "rafamadriz/friendly-snippets",
-    "L3MON4D3/LuaSnip", },
-
+    "L3MON4D3/LuaSnip",
+  },
   version = "1.*",
   opts = {
     keymap = { preset = "enter" },
 
     appearance = {
       nerd_font_variant = "mono",
+      kind_icons = {
+        Field = '󰜢',
+        Variable = '󰆦',
+        Property = '󰖷',
+
+        Class = '󱡠',
+        Interface = '󱡠',
+        Struct = '󱡠',
+        Module = '󰅩',
+
+        Unit = '󰪚',
+        Value = '󰦨',
+        Enum = '󰦨',
+        EnumMember = '󰦨',
+
+        Keyword = '󰻾',
+        Constant = '󰏿',
+
+        Snippet = '󱄽',
+        Color = '󰏘',
+        File = '󰈔',
+        Reference = '󰬲',
+        Folder = '󰉋',
+        Event = '󱐋',
+        Operator = '󰪚',
+        TypeParameter = '󰬛',
+      },
     },
 
     completion = {
@@ -28,6 +55,7 @@ return {
       },
     },
     sources = {
+      default = { "lsp", "path", "snippets" },
       providers = {
         snippets = {
           min_keyword_length = 2,
@@ -51,4 +79,4 @@ return {
     require("blink.cmp").setup(opts)
     require("luasnip.loaders.from_vscode").lazy_load()
   end,
-}
+} }
