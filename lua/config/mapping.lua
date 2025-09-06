@@ -2,17 +2,6 @@ local opt = vim.opt
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- Basic options
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.tabstop = 2
-opt.relativenumber = true
-opt.clipboard = "unnamedplus"
--- Leader key
-vim.g.mapleader = " "
-vim.g.lazyvim_blink_main = false
-
--- Copy visual selection to system clipboard
 function copy_visual_selection()
 	local start_pos = vim.fn.getpos("'<")
 	local end_pos = vim.fn.getpos("'>")
