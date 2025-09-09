@@ -31,7 +31,7 @@ return {
 					end,
 				},
 			})
-			local on_attach = function(client, bufnr)
+			local on_attach = function(_, bufnr)
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
