@@ -1,9 +1,53 @@
+local function tailwindcss_config(capabilities, on_attach)
+	return {
+		capabilities = capabilities,
+		on_attach = on_attach,
+		init_options = {
+			userLanguages = {
+				typescriptreact = "javascriptreact",
+				typescript = "javascript",
+			},
+		},
+		filetypes = {
+			"typescriptreact",
+			"javascriptreact",
+			"html",
+			"css",
+		},
+		on_new_config = function(new_config, _)
+			new_config.settings = {
+				tailwindCSS = {
+					experimental = {
+						classRegex = {
+							{ 'class[Name]*?="([^"]*)"', '"([^"]*)"' },
+							{ "class[Name]*?='([^']*)'", "'([^']*)'" },
+							{ "class[Name]*?=`([^`]*)`", "`([^`]*)`" },
+							{ "className%s*=%s*{([^}]*)}", "['\"`]([^'\"`]*)['\"`]" },
+						},
+					},
+				},
+			}
+		end,
+		root_dir = function(fname)
+			local allowed = { "typescriptreact", "javascriptreact", "html", "css" }
+			local ft = vim.bo.filetype
+			if vim.tbl_contains(allowed, ft) then
+				return require("lspconfig.util").root_pattern(
+					"tailwind.config.js",
+					"tailwind.config.ts",
+					"package.json"
+				)(fname)
+			end
+			return nil
+		end,
+	}
+end
+
 return {
 	{
 		"williamboman/mason.nvim",
 		opts = {
 			ensure_installed = {
-				"typescript-language-server",
 				"eslint-lsp",
 				"gopls",
 			},
@@ -43,17 +87,13 @@ return {
 
 			local servers = {
 				"cssls",
-				"dockerls",
-				"emmet_ls",
-				"jsonls",
-				"prismals",
-				"tailwindcss",
 				"html",
-				"ts_ls",
 				"eslint",
-				"gopls",
+				"vtsls",
+				"emmet_ls",
 			}
 
+			lspconfig.tailwindcss.setup(tailwindcss_config(capabilities, on_attach))
 			for _, server in ipairs(servers) do
 				lspconfig[server].setup({
 					capabilities = capabilities,
