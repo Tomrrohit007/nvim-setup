@@ -68,7 +68,7 @@ return {
 		},
 		keys = {
 			{
-				"<S-n>",
+				"<leader>e",
 				function()
 					require("snacks").explorer()
 				end,
@@ -89,7 +89,7 @@ return {
 				desc = "Find Files",
 			},
 			{
-				"<leader>fg",
+				"<leader>gf",
 				function()
 					require("snacks").picker.git_files()
 				end,

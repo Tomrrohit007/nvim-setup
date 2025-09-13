@@ -4,7 +4,7 @@
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "conform.nvim": { "branch": "master", "commit": "b4aab989db276993ea5dcb78872be494ce546521" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
-  "fzf-lua": { "branch": "main", "commit": "ad5e33a6f4ecd1ac9d1d5a81d1a72353ca24da5d" },
+  "fzf-lua": { "branch": "main", "commit": "e9d1683a4ed0326c5cfe3856b4503338b584aaa0" },
   "gruvdark.nvim": { "branch": "main", "commit": "509de40e8cd907850273e981e28d623ee3a58191" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "7f9a39fcd2ac6e979001f857727d606888f5909c" },

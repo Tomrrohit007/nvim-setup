@@ -19,9 +19,9 @@ local function tailwindcss_config(capabilities, on_attach)
 				tailwindCSS = {
 					experimental = {
 						classRegex = {
-							{ 'class[Name]*?="([^"]*)"', '"([^"]*)"' },
-							{ "class[Name]*?='([^']*)'", "'([^']*)'" },
-							{ "class[Name]*?=`([^`]*)`", "`([^`]*)`" },
+							-- { 'class[Name]*?="([^"]*)"', '"([^"]*)"' },
+							-- { "class[Name]*?='([^']*)'", "'([^']*)'" },
+							-- { "class[Name]*?=`([^`]*)`", "`([^`]*)`" },
 							{ "className%s*=%s*{([^}]*)}", "['\"`]([^'\"`]*)['\"`]" },
 						},
 					},
@@ -49,7 +49,6 @@ return {
 		opts = {
 			ensure_installed = {
 				"eslint-lsp",
-				"gopls",
 			},
 		},
 	},
@@ -86,14 +85,37 @@ return {
 			end
 
 			local servers = {
-				"cssls",
-				"html",
+
 				"eslint",
-				"vtsls",
-				"emmet_ls",
+				-- "vtsls",
+				-- "emmet_ls",
 			}
 
 			lspconfig.tailwindcss.setup(tailwindcss_config(capabilities, on_attach))
+			lspconfig.vtsls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					typescript = {
+						suggest = {
+							completeFunctionCalls = false, -- keep disabled for performance
+						},
+						updateImportsOnFileMove = {
+							enabled = "always",
+						},
+						diagnostics = {
+							enable = false,
+							reportUnusedDisableDirectives = false,
+							reportDeprecated = false,
+						},
+						format = {
+							enable = false,
+						},
+					},
+				},
+			})
+
+			--
 			for _, server in ipairs(servers) do
 				lspconfig[server].setup({
 					capabilities = capabilities,
