@@ -36,11 +36,6 @@ return {
 				},
 			})
 
-			-- Safety: disable treesitter if errors persist
-			local disable_treesitter_highlight = function()
-				vim.cmd([[TSBufDisable highlight]])
-			end
-
 			-- Create a command to toggle treesitter if needed
 			vim.api.nvim_create_user_command("TSToggle", function()
 				if vim.b.treesitter_disabled then
