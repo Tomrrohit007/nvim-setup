@@ -9,6 +9,11 @@ opt.cmdheight = 2
 vim.g.mapleader = " "
 vim.g.lazyvim_blink_main = false
 
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevel = 99
+vim.cmd("cnoreabbrev qa qa!")
+
 -- Use command syntax for noswapfile
 vim.cmd("set noswapfile")
 -- Directory settings

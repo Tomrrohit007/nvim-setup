@@ -91,13 +91,8 @@ vim.cmd('cnoreabbrev <expr> w getcmdtype() == ":" && getcmdline() ==# "w" ? "wa"
 
 vim.cmd('cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() ==# "q" ? "qa" : "q"')
 
-map("n", "<Tab>", ":BufferNext<CR>", opts)
-map("n", "<S-Tab>", ":BufferPrevious<CR>", opts)
+-- delete text but keep the space.
+vim.keymap.set("n", "D", "0d$", { noremap = true })
 
--- Pick a buffer by number
-map("n", "<Leader>1", ":BufferGoto 1<CR>", opts)
-map("n", "<Leader>2", ":BufferGoto 2<CR>", opts)
-map("n", "<Leader>3", ":BufferGoto 3<CR>", opts)
-
--- Close buffer
-map("n", "<Leader>c", ":BufferClose<CR>", opts)
+-- Add an empty line above and below
+vim.keymap.set("n", "z", "za", { desc = "collapsing code block" })

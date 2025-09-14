@@ -12,11 +12,20 @@ return {
 				documentation = { auto_show = true },
 				menu = {
 					draw = {
-						columns = {
-							{ "label", "label_description", gap = 1 },
-							{ "kind_icon", "kind" },
+						components = {
+							kind_icon = {
+								ellipsis = false,
+								text = function(ctx)
+									local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+									return kind_icon
+								end,
+							},
 						},
-						treesitter = { "lsp" },
+					 	-- columns = {
+						-- 	{ "label", "label_description", gap = 1 },
+						-- 	{ "kind_icon", "kind" },
+						-- },
+						-- treesitter = { "lsp" },
 					},
 				},
 				trigger = {
