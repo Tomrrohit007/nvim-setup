@@ -1,48 +1,3 @@
-local function tailwindcss_config(capabilities, on_attach)
-	return {
-		capabilities = capabilities,
-		on_attach = on_attach,
-		init_options = {
-			userLanguages = {
-				typescriptreact = "javascriptreact",
-				typescript = "javascript",
-			},
-		},
-		filetypes = {
-			"typescriptreact",
-			"javascriptreact",
-			"html",
-			"css",
-		},
-		on_new_config = function(new_config, _)
-			new_config.settings = {
-				tailwindCSS = {
-					experimental = {
-						classRegex = {
-							-- { 'class[Name]*?="([^"]*)"', '"([^"]*)"' },
-							-- { "class[Name]*?='([^']*)'", "'([^']*)'" },
-							-- { "class[Name]*?=`([^`]*)`", "`([^`]*)`" },
-							{ "className%s*=%s*{([^}]*)}", "['\"`]([^'\"`]*)['\"`]" },
-						},
-					},
-				},
-			}
-		end,
-		root_dir = function(fname)
-			local allowed = { "typescriptreact", "javascriptreact", "html", "css" }
-			local ft = vim.bo.filetype
-			if vim.tbl_contains(allowed, ft) then
-				return require("lspconfig.util").root_pattern(
-					"tailwind.config.js",
-					"tailwind.config.ts",
-					"package.json"
-				)(fname)
-			end
-			return nil
-		end,
-	}
-end
-
 return {
 	{
 		"williamboman/mason.nvim",
@@ -79,7 +34,6 @@ return {
 
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 			end
@@ -87,14 +41,20 @@ return {
 			local servers = {
 
 				"eslint",
-				-- "vtsls",
-				-- "emmet_ls",
+				"tailwindcss",
 			}
 
-			lspconfig.tailwindcss.setup(tailwindcss_config(capabilities, on_attach))
 			lspconfig.vtsls.setup({
 				capabilities = capabilities,
 				on_attach = on_attach,
+				root_markers = {
+					".package.json",
+					".package-lock.json",
+					"tsconfig.json",
+					".git",
+				},
+
+				filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "typescript.tsx" },
 				settings = {
 					typescript = {
 						suggest = {
@@ -120,6 +80,9 @@ return {
 				lspconfig[server].setup({
 					capabilities = capabilities,
 					on_attach = on_attach,
+					root_markers = {
+						".git",
+					},
 				})
 			end
 		end,

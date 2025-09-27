@@ -10,7 +10,7 @@ return {
 		},
 	},
 	config = function(_, opts)
-		vim.o.laststatus = 3 -- Ensure global statusline
+		vim.o.laststatus = 3
 		require("slimline").setup(opts)
 	end,
 }

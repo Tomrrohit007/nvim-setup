@@ -2,13 +2,12 @@ local function term_nav(dir)
 	return function()
 		local mode = vim.fn.mode()
 		if mode == "t" then
-			return ("<C-\\><C-N><C-%s>"):format(dir)
+			return ("<C-><C-N><C-%s>"):format(dir)
 		else
 			return ("<C-%s>"):format(dir)
 		end
 	end
 end
-
 -- Add this at the top of your config file, before returning the plugin table
 vim.api.nvim_create_autocmd("BufLeave", {
 	pattern = "*",
@@ -18,13 +17,11 @@ vim.api.nvim_create_autocmd("BufLeave", {
 		end
 	end,
 })
-
 return {
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-
 		opts = {
 			bigfile = { enabled = true },
 			dashboard = { enabled = true },
@@ -144,7 +141,6 @@ return {
 				end,
 				desc = "Goto Implementation",
 			},
-
 			{
 				"<leader>S",
 				function()

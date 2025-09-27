@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 local opt = vim.opt
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -65,8 +66,18 @@ map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
 map("n", "gr", vim.lsp.buf.references, { desc = "Goto references" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation" })
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
---
--- Yank mappings
+
+map("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
+map("n", "<leader>r", function()
+	-- Get the word under cursor
+	local word = vim.fn.expand("<cword>")
+	-- Prompt for new name
+	local new_name = vim.fn.input("New name: ", word)
+	if new_name ~= "" and new_name ~= word then
+		-- Replace all instances in buffer
+		vim.cmd("%s/\\<" .. word .. "\\>/" .. new_name .. "/g")
+	end
+end, { noremap = true, silent = false, desc = "Rename all instances" }) -- Yank mappings
 
 map("n", "Y", function()
 	vim.cmd("normal! yy")

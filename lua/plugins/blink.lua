@@ -21,11 +21,6 @@ return {
 								end,
 							},
 						},
-					 	-- columns = {
-						-- 	{ "label", "label_description", gap = 1 },
-						-- 	{ "kind_icon", "kind" },
-						-- },
-						-- treesitter = { "lsp" },
 					},
 				},
 				trigger = {
@@ -33,7 +28,7 @@ return {
 				},
 			},
 			sources = {
-				default = { "snippets", "lsp", "path", "buffer" },
+				default = { "snippets", "lsp", "buffer" },
 				providers = {
 					snippets = {
 						min_keyword_length = 1,
@@ -41,12 +36,11 @@ return {
 						max_items = 4,
 					},
 					lsp = {
-						min_keyword_length = 1,
+						min_keyword_length = 2,
 						score_offset = 5,
 						async = true,
 						max_items = 3,
 					},
-					path = { min_keyword_length = 3, score_offset = 3 },
 					buffer = {
 						min_keyword_length = 3,
 						score_offset = 5,
@@ -60,7 +54,9 @@ return {
 					"score",
 					"sort_text",
 				},
-				use_frecency = true,
+				frecency = {
+					enabled = true,
+				},
 				use_proximity = true,
 			},
 		},

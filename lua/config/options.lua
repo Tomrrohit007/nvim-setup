@@ -5,10 +5,13 @@ opt.tabstop = 2
 opt.relativenumber = true
 opt.clipboard = "unnamedplus"
 opt.cmdheight = 2
--- Leader key
-vim.g.mapleader = " "
-vim.g.lazyvim_blink_main = false
+opt.spell = true
+opt.spelllang = { "en_us" } -- Set your desired language(s)
 
+-- Leader key
+
+vim.g.lazyvim_blink_main = false
+-- In init.lua
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldlevel = 99
