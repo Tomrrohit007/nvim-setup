@@ -1,3 +1,5 @@
+-- Add this at the top of your config file, before returning the plugin table
+
 local function term_nav(dir)
 	return function()
 		local mode = vim.fn.mode()
@@ -8,22 +10,14 @@ local function term_nav(dir)
 		end
 	end
 end
--- Add this at the top of your config file, before returning the plugin table
-vim.api.nvim_create_autocmd("BufLeave", {
-	pattern = "*",
-	callback = function()
-		if vim.bo.modified then
-			vim.cmd("silent! write")
-		end
-	end,
-})
+
+
 return {
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
 		opts = {
-			bigfile = { enabled = true },
 			dashboard = { enabled = true },
 			explorer = { enabled = true },
 			indent = { enabled = true },
@@ -34,10 +28,11 @@ return {
 			},
 			buffers = { enabled = true },
 			picker = {
+				exclude = {
+					".git",
+					"node_modules",
+				},
 				sources = {
-					files = {
-						exclude = { "node_modules" },
-					},
 					explorer = {
 						layout = {
 							layout = {
@@ -70,13 +65,6 @@ return {
 					require("snacks").explorer()
 				end,
 				desc = "File Explorer",
-			},
-			{
-				"<leader>t",
-				function()
-					require("snacks").terminal()
-				end,
-				desc = "Toggle Snacks Terminal",
 			},
 			{
 				"<leader><leader>",

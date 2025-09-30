@@ -92,12 +92,6 @@ map("n", "<leader>W", set_nowrap, { noremap = true, silent = true })
 map("n", "<leader>ge", vim.diagnostic.goto_next, { noremap = true, silent = true })
 map("n", "<leader>gE", vim.diagnostic.goto_prev, { noremap = true, silent = true })
 
--- 📊 TERMINAL LAYOUTS (Easy muscle memory)
-map("n", "<leader>t", ":TermNew layout=below<CR>", opts) -- Below (b)ottom
-map("n", "<leader>cv", ":TermNew layout=right<CR>", opts)
-map("n", "<leader>tf", ":TermNew layout=float<CR>", opts) -- (F)loat
-map("n", "<leader>ts", ":TermSend! new_line=false<CR>", opts) -- (S)end line
-
 vim.cmd('cnoreabbrev <expr> w getcmdtype() == ":" && getcmdline() ==# "w" ? "wa" : "w"')
 
 vim.cmd('cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() ==# "q" ? "qa" : "q"')
@@ -107,3 +101,6 @@ vim.keymap.set("n", "D", "0d$", { noremap = true })
 
 -- Add an empty line above and below
 vim.keymap.set("n", "z", "za", { desc = "collapsing code block" })
+
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { expr = true, silent = true })

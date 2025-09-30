@@ -17,18 +17,7 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			local lspconfig = require("lspconfig")
-
-			vim.diagnostic.config({
-				virtual_text = {
-					source = "if_many",
-					prefix = "●",
-					spacing = 4,
-					format = function(diagnostic)
-						return string.format("%s (%s)", diagnostic.message, diagnostic.source)
-					end,
-				},
-			})
+			local lspconfig = vim.lsp
 			local on_attach = function(_, bufnr)
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -44,7 +33,7 @@ return {
 				"tailwindcss",
 			}
 
-			lspconfig.vtsls.setup({
+			lspconfig.config("vtsls", {
 				capabilities = capabilities,
 				on_attach = on_attach,
 				root_markers = {
@@ -69,21 +58,23 @@ return {
 							reportDeprecated = false,
 						},
 						format = {
-							enable = false,
+							enable = true,
 						},
 					},
 				},
 			})
+			lspconfig.enable("vtsls")
 
 			--
 			for _, server in ipairs(servers) do
-				lspconfig[server].setup({
+				lspconfig.config(server, {
 					capabilities = capabilities,
 					on_attach = on_attach,
 					root_markers = {
 						".git",
 					},
 				})
+				lspconfig.enable(server)
 			end
 		end,
 	},

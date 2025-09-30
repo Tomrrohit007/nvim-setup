@@ -36,13 +36,13 @@ return {
 						max_items = 4,
 					},
 					lsp = {
-						min_keyword_length = 2,
+						min_keyword_length = 0,
 						score_offset = 5,
 						async = true,
 						max_items = 3,
 					},
 					buffer = {
-						min_keyword_length = 3,
+						min_keyword_length = 2,
 						score_offset = 5,
 					},
 				},

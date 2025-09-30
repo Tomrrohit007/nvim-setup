@@ -8,7 +8,7 @@ return {
 			javascriptreact = { "prettierd" },
 			typescriptreact = { "prettierd" },
 			go = { "gofmt", "goimports", "prettierd" },
-			html = { { "htmlbeautifier", "prettierd", "prettier", stop_after_first = true } },
+			html = { "prettierd" },
 			css = { "prettierd" },
 			json = { "prettierd" },
 			jsonc = { "prettierd" },
@@ -16,7 +16,7 @@ return {
 		},
 
 		format_on_save = {
-			timeout_ms = 1000,
+			timeout_ms = 3000,
 			lsp_fallback = true,
 			async = false,
 		},
