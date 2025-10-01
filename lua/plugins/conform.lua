@@ -7,7 +7,7 @@ return {
 			typescript = { "prettierd" },
 			javascriptreact = { "prettierd" },
 			typescriptreact = { "prettierd" },
-			go = { "gofmt", "goimports", "prettierd" },
+			go = { "gofmt", "goimports" },
 			html = { "prettierd" },
 			css = { "prettierd" },
 			json = { "prettierd" },
